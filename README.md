@@ -49,4 +49,3 @@ $ docker run -it --rm --name bleboxapp bleboxwrapper
 
 ## Credits
 Author of this project is Adam Strojek
-g
