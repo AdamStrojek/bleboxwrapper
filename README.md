@@ -19,11 +19,11 @@ Currently this devices are supported:
 
 Whole configuration for wrapper is made base on environment variables. Available options:
 
-- BLEBOX_ADDRESS (*required*) - IP address of BleBox WiFi switch
-- MQTT_SERVER (*required*) - IP address or domain of MQTT server
-- MQTT_PORT (default: 1883, optional) - port of MQTT server
-- MQTT_TOPIC_ID (default: _blebox_, optional) - used in topics that are subscribed by wrapper 
-- MQTT_CLIENT_ID (default: _BleBox Wrapper_, optional) - client name for MQTT, important only if you run multiple
+- `BLEBOX_ADDRESS` (*required*) - IP address of BleBox WiFi switch
+- `MQTT_SERVER` (*required*) - IP address or domain of MQTT server
+- `MQTT_PORT` (default: 1883, optional) - port of MQTT server
+- `MQTT_TOPIC_ID` (default: _blebox_, optional) - used in topics that are subscribed by wrapper
+- `MQTT_CLIENT_ID` (default: _BleBox Wrapper_, optional) - client name for MQTT, important only if you run multiple
  instances of this wrapper
 
 
