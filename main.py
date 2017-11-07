@@ -1,28 +1,27 @@
 import os
-import logging
+import sys
 
 import paho.mqtt.client as mqtt
 import requests
 
 
-logger = logging.getLogger('bleboxwrapper')
-
 VERBOSE = os.environ.get('VERBOSE', 0)
 VERBOSE = VERBOSE in (1, True, 'on', 'yes', 'true', 'y', '1')
 
 
-def info(text):
-    print(text)
+def info(*args, **kwargs):
+    print(*args, **kwargs)
+
+
+def error(*args, **kwargs):
+    print(*args, **kwargs, file=sys.stderr)
+
 
 if VERBOSE:
-    logger.setLevel(logging.DEBUG)
-
-    def debug(text):
-        print(text)
+    def debug(*args, **kwargs):
+        print(*args, **kwargs)
 else:
-    logger.setLevel(logging.INFO)
-
-    def debug(text):
+    def debug(*args, **kwargs):
         pass
 
 
@@ -38,17 +37,17 @@ BLEBOX_ADDRESS = os.environ.get('BLEBOX_ADDRESS', None)
 conf_error = False
 
 if not MQTT_SERVER:
-    logger.error("MQTT_SERVER is required")
+    error("MQTT_SERVER is required")
     conf_error = True
 
 try:
     MQTT_PORT = int(MQTT_PORT)
 except TypeError:
-    logger.error("MQTT_PORT need to be integer")
+    error("MQTT_PORT need to be integer, not {0}".format(MQTT_PORT))
     conf_error = True
 
 if not BLEBOX_ADDRESS:
-    logger.error("BLEBOX_ADDRESS is required")
+    error("BLEBOX_ADDRESS is required")
     conf_error = True
 
 if conf_error:
@@ -82,7 +81,7 @@ info("Connected to Blebox: {0}".format(blebox_name))
 debug(response.content)
 
 if blebox_type != "switchBox":
-    logger.error("Currently only switchBox is supported")
+    error("Currently only switchBox is supported")
     exit(2)
 
 
@@ -99,7 +98,7 @@ def on_command(client, userdata, msg):
         }[data[0]['state']]
         client.publish(topic_publish, payload=state)
     else:
-        logger.error("Problem during sending command")
+        error("Problem during sending command")
 
 
 # The callback for when the client receives a CONNACK response from the server.
