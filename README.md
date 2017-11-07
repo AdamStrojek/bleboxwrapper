@@ -11,8 +11,11 @@ Currently this devices are supported:
 
 ## Planned features
 
+- [ ] Split files into separate modules
+- [ ] Support installing package as module
 - [ ] Support for BleBox switchBoxD
 - [ ] Check periodically for current switch status and publish it on MQTT server
+- [ ] Use asyncio for pooling events
 
 
 ## Configuration
@@ -44,7 +47,7 @@ Just type this command in main directory:
 
 ```commandline
 $ docker build -t bleboxwrapper .
-$ docker run -it --rm --name bleboxapp bleboxwrapper
+$ docker run -it --rm -e BLEBOX_ADDRESS=blebox -e MQTT_SERVER=mqtt --name bleboxapp bleboxwrapper
 ```
 
 ## Credits
